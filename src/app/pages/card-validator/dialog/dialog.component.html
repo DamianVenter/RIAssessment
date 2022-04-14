@@ -1,0 +1,40 @@
+<form [formGroup]="creditCardInputForm" (ngSubmit)="onSubmit(creditCardInputForm)">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Card Number</mat-label>
+    <input type="number" formControlName="cardNumber" matInput>
+    <small class="text-danger"
+      *ngIf="creditCardInputForm.get('cardNumber')!.hasError('required') && creditCardInputForm.get('cardNumber')!.dirty == true ">
+      This field is required.
+    </small>
+    <small class="text-danger"
+      *ngIf="creditCardInputForm.get('cardNumber')!.hasError('invalidCreditCardNumberLength') && creditCardInputForm.get('cardNumber')!.dirty == true">
+      The card number must be between 8 and 19 characters.
+    </small>
+    <small class="text-danger"
+      *ngIf="creditCardInputForm.get('cardNumber')!.hasError('invalidCreditCardNumber') && creditCardInputForm.get('cardNumber')!.dirty == true">
+      The credit card number is invalid, please check you have inserted it correctly.
+    </small>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Provider</mat-label>
+    <mat-select formControlName="provider">
+      <mat-option value="Visa">Visa</mat-option>
+      <mat-option value="Mastercard">Mastercard</mat-option>
+      <mat-option value="American Express">American Express</mat-option>
+      <mat-option value="Discover">Discover</mat-option>
+      <mat-option value="Diners Club">Diners Club</mat-option>
+      <mat-option value="Cart Blanche">Cart Blanche</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Country</mat-label>
+    <mat-select formControlName="country">
+      <mat-option *ngFor="let country of countries" [value]="country.name">{{country.name}} </mat-option>
+    </mat-select>
+
+  </mat-form-field>
+
+  <button [disabled]="creditCardInputForm.status == 'INVALID'" type="submit">Submit</button>
+
+</form>

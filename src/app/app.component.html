@@ -1,0 +1,32 @@
+<mat-drawer-container class="bg-pan-bl">
+    <mat-drawer #drawer mode="side" closed>
+        <br />
+        <br />
+        <br />
+        <button routerLink="/dashboard"> Dashboard</button>
+
+        <br />
+
+        <button routerLink="/card-validator">Card Validator Portal</button>
+
+    </mat-drawer>
+
+    <mat-drawer-content>
+
+        <button id="sidenavToggle" (click)="drawer.toggle()">
+            <div id="nav-icon2" [ngClass]="[drawer.opened? 'open': 'closed']">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+
+        <div id="routerOutlet">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-content>
+
+</mat-drawer-container>
